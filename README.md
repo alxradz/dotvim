@@ -14,22 +14,16 @@ How to use?
 ### 1. Clone my repository to your home directory.
 
 ```
-$git clone https://github.com/xautjzd/dotvim.git ~/.vim
+$git clone --recursive https://github.com/alxradz/dotvim.git ~/.vim
 ```	
 
-### 2. Install [vundle](https://github.com/gmarik/Vundle.vim).
-
-```
-$git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-```
-
-### 3. Create soft link to `vimrc`.
+### 2. Create soft link to `vimrc`.
 
 ```
 $ln -s ~/.vim/vimrc ~/.vimrc
 ```
 
-### 4. Install plugins via vundle.
+### 3. Install plugins via vundle.
 
 open vim, and run `:BundleInstall` to install the specified plugins in the `~/.vimrc` file.After completed,compile the YCM(YouCompleteMe) plugin.Before compiling, you should have `cmake` and `python` installed.
 
@@ -46,16 +40,8 @@ Make sure you have Python installed:
 
 Compile `YouCompleteMe` plugin:
 
-    $cd ~/.vim/bundle/YouCompleteMe
-    $./install.sh ~/.vimrc
+    $cd ~/.vim/bundle/YouCompleteMe/third_party/ycmd
+    $./build.sh --clang-completer
 
 About more details,please refer to [YouCompleteMe](https://github.com/Valloric/YouCompleteMe). 
-
-### 5. Install patched fonts
-
-For the nice looking powerline symbols to appear, you will need to install a patched font. Instructions can be found in the official powerline [documentation][1]. Prepatched fonts can be found in the [powerline-fonts][2] repository
-
-	
-[1]: https://powerline.readthedocs.org/en/latest/fontpatching.html
-[2]: https://github.com/Lokaltog/powerline-fonts
 

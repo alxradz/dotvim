@@ -234,7 +234,7 @@ behave mswin
 cnoremap <C-A>		<Home>
 cnoremap <C-E>		<End>
 cnoremap <C-K>		<C-U>
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
+cnoremap <C-P> 		<Up>
+cnoremap <C-N> 		<Down>
 
 
