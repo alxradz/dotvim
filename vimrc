@@ -30,12 +30,12 @@ Bundle 'kien/ctrlp.vim'
 
 "snippets
 Bundle 'SirVer/ultisnips'
-"Bundle 'vim-scripts/snipMate'
 
 " Auto complete plugin
 Bundle 'Valloric/YouCompleteMe'
-" Bundle 'Shougo/neocomplcache.vim'
-"Bundle 'SuperTab'
+
+"Python mode
+Bundle 'klen/python-mode'
 
 " Code comment and decomment
 Bundle 'tomtom/tcomment_vim'
@@ -45,26 +45,20 @@ Bundle 'majutsushi/tagbar'
 " Static syntax checking
 Bundle 'scrooloose/syntastic'
 
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-fugitive'
-
 Bundle 'Lokaltog/vim-easymotion'
-" write HTML code faster(inspired by zencodeing)
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " ColorScheme
-Bundle 'tomasr/molokai'
+"Bundle 'altercation/vim-colors-solarized'
+"Bundle 'noahfrederick/vim-noctu'
 
 "Airline
 Bundle 'bling/vim-airline'
 
 " Utility
-" Bundle 'repeat.vim'
 Bundle 'tpope/vim-surround'
 
 Bundle 'junegunn/goyo.vim'
 
-" Bundle 'plasticboy/vim-markdown'
 Bundle 'tpope/vim-markdown'
 
 "vimdeck depend on it
@@ -84,19 +78,13 @@ filetype indent plugin on     " Enable loading the plugin files for specific fil
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader=','
 
-"Disable up、down、left、right
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-
 " Edit my vimrc file through <leader>ev default leader is \
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 " Take the contents of given file and execute it in Vimscript, default $MYVIMRC is ~/.vimrc
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Type <leader>" vim will surround the word in double quotes
-" nnoremap <leader>" bi"<esc>lwa"<esc>l
+nnoremap <leader>" bi"<esc>lwa"<esc>l
 
 "Automatically append closing characters
 " inoremap ( ()<Esc>i
@@ -104,7 +92,7 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " inoremap " ""<Esc>i
 
 " To save, press <c-s>
-" imap <c-s> <ESC>:w<CR>a
+imap <c-s> <ESC>:w<CR>a
 
 " Disable escape key in insert mode, <nop>(no operation)
 inoremap jk <esc>
@@ -123,23 +111,15 @@ set autoindent
 set smartindent   
 set autoread       " Reload files when changed
 
-" set ruler
+set ruler
+
 " set expandtab
 set tabstop=4      " Set number of spaces that a <Tab> in the file counts for
 set cindent
 set shiftwidth=4   " Set width of nested tabs,control  how many columns text is indented with the reindent operations(<<)
 
-" autocmd: specify commands to be executed automatically when reading or
-" writing a file, when entering or leaving a buffer or window
-" More information, please refer to:
-" http://learnvimscriptthehardway.stevelosh.com/chapters/12.html
-autocmd BufRead,BufNewFile *.rb set shiftwidth=2  " If edit *.rb file,shiftwidth is 2; otherwise, it's 4
-autocmd BufRead,BufNewFile *.rb set tabstop=2  " If edit *.rb file,shiftwidth is 2; otherwise, it's 4
-" autocmd BufWritePre * :normal gg=G
-
 " Set code folding method
 set foldmethod=syntax
-
 
 " When setting showcmd, the bottom line will show you information about the
 " current command going on
@@ -149,13 +129,10 @@ set showcmd
 set encoding=utf-8
 "set file encoding when save or new file
 set fileencoding=utf-8
-"file encode list,when vim read file,it will detect according to this config
-set fileencodings=utf-8,gbk,gb2312
-" set guifont=*
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vim UI
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
 " Highlight the current line
 set cursorline
 
@@ -163,12 +140,21 @@ set cursorline
 set hlsearch
 set incsearch
 
+" Ignore case when searching
+set ignorecase
+
 " Status line config
 set laststatus=2  "Always show the status line
 set t_Co=256
 
 "Set the colortheme of vim
-colorscheme molokai
+syntax enable
+set background=dark
+"let g:solarized_bold=0
+"let g:solarized_italic=0
+"let g:solarized_underline=0
+colorscheme radz-noctu
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vim plugin config
@@ -178,7 +164,7 @@ colorscheme molokai
 autocmd BufNewFile,BufRead *.html.erb set filetype=html.eruby
 
 " NERDTree
-let NERDTreeWinSize=20
+let NERDTreeWinSize=30
 
 " ctrlP
 let g:ctrlp_extensions = ['tag']
@@ -192,7 +178,6 @@ let g:ctrlp_custom_ignore = {
 			\ 'file': '\v\.(so|swap|tar|zip|jar|jpg|png|pdf|doc|docx|gz|bz2|rpm|deb)$',
 			\}
 
-
 " TagList
 let Tlist_Inc_Winwidth=0
 let Tlist_Process_File_Always=1
@@ -204,11 +189,8 @@ set tags=./tags,tags;/
 let g:tagbar_width=20   " Set tagbar window width
 
 " Vim-airline
-" More airline-customization please refer to vim-airline doc:
-" https://github.com/bling/vim-airline
-let g:airline_powerline_fonts=1 " Let airline plugin use the arrow effect of powerline
+let g:airline_powerline_fonts=0 " Let airline plugin use the arrow effect of powerline
 let g:airline_detect_whitespace=0 " *trailing[164] is part of the whitespace extension, disable it  
-"set vim statusbar theme
 let g:airline_theme="molokai"
 
 " YouComepleteMe
@@ -216,30 +198,22 @@ let g:airline_theme="molokai"
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 
-" Enable NeoComplCache
-" let g:neocomplcache_enable_at_startup=1
-
 " Syntastic plugin
 " check header files for C
 let g:Syntastic_c_check_header = 1
 let syntastic_mode_map = { 'passive_filetypes': ['html'] } " don't check html
 
 " Goyo
-function! g:goyo_before()
-	silent !tmux set status off
-endfunction
+"function! g:goyo_before()
+"	silent !tmux set status off
+"endfunction
 
-function! g:goyo_after()
-	silent !tmux set status on
-endfunction
+"function! g:goyo_after()
+"	silent !tmux set status on
+"endfunction
 
-let g:goyo_callbacks = [function('g:goyo_before'), function('g:goyo_after')]
-noremap <leader>g :Goyo<CR>
-
-" Sparkup
-" let g:sparkup = 'bundle/sparkup/sparkup.py'
-let g:sparkupExecuteMapping = '<c-x>'
-let g:sparkupNextMapping = '<c-e>'
+"let g:goyo_callbacks = [function('g:goyo_before'), function('g:goyo_after')]
+"noremap <leader>g :Goyo<CR>
 
 " Vim-markdown
 let g:vim_markdown_folding_disabled=1
@@ -247,8 +221,19 @@ let g:vim_markdown_folding_disabled=1
 " Set shorcut key
 nmap <F2> :NERDTreeToggle<CR>
 nmap <F3> :TagbarToggle<CR>
+
 " Stop automatic indentation when copied from another application at insert
 " mode
 set pastetoggle=<F2>
 
-autocmd FileType ruby map <F9> :w<CR>:!ruby -c %<CR>  " ruby syntax gets checked on pressing <F9> key
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
+" Bash like keys for the command line
+cnoremap <C-A>		<Home>
+cnoremap <C-E>		<End>
+cnoremap <C-K>		<C-U>
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+
+
