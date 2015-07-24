@@ -32,7 +32,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'SirVer/ultisnips'
 
 " Auto complete plugin
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 
 "Python mode
 Bundle 'klen/python-mode'
@@ -80,6 +80,7 @@ let mapleader=','
 
 " Edit my vimrc file through <leader>ev default leader is \
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+
 " Take the contents of given file and execute it in Vimscript, default $MYVIMRC is ~/.vimrc
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
@@ -165,7 +166,7 @@ source ~/.vim/colors/radznotcu.vim
 autocmd BufNewFile,BufRead *.html.erb set filetype=html.eruby
 
 " NERDTree
-let NERDTreeWinSize=30
+let NERDTreeWinSize=20
 
 " ctrlP
 let g:ctrlp_extensions = ['tag']
@@ -195,9 +196,8 @@ let g:airline_detect_whitespace=0 " *trailing[164] is part of the whitespace ext
 let g:airline_theme="molokai"
 
 " YouComepleteMe
-" Set YouCompleteMe trigger key 
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
+"let g:ycm_key_list_select_completion = ['<Down>']
+"let g:ycm_key_list_previous_completion = ['<Up>']
 
 " Syntastic plugin
 " check header files for C
@@ -221,6 +221,7 @@ let g:vim_markdown_folding_disabled=1
 
 " Set shorcut key
 nmap <F2> :NERDTreeToggle<CR>
+nmap <S-F2> :NERDTreeCWD
 nmap <F3> :TagbarToggle<CR>
 
 " Stop automatic indentation when copied from another application at insert
